@@ -1,0 +1,172 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> Biodata </title>
+    
+    <link rel="stylesheet" href="style1.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>   
+ </head>
+
+<body>
+	<div class="header"> <!-- Logo+Navigation bar with links -->
+  		<nav>
+  			<img src="logo.png" height="20%" width="20%">
+  			<ul>
+  				<li><a href="index.html">Home Page</a></li>
+  				<li><a href="biodata.html">Biodata</a></li>
+  				<li><a href="family.html">Family</a></li>
+  				<li><a href="education.html">Education</a></li>
+  				<li><a href="gallery.html">Gallery</a></li>
+  				<li><a href="skills.html">Skills</a></li>
+				<li><a href="references.html">References</a></li>
+  			</ul>
+  		
+	        <div class="socialIcon">
+          		<a href="https://instagram.com/frhfarhanim?igshid=OGQ5ZDc2ODk2ZA=="><i class='bx bxl-instagram'></i></a>
+          		<a href="https://twitter.com/icebearitself?s=21&t=3o9D8-XK553zrWUlAv8XLw"><i class='bx bxl-twitter'></i></a>
+        	</div>
+		</nav>
+	</div>
+	<table border="0" cellpadding="55" cellspacing="55" align="center">
+	<tr>
+	<td>
+
+		<table border="0" align="left" cellpadding="30"  width="100%">
+		<tr>
+			<td rowspan="5"><img src="formal.jpg" height="230" width="200" border="3" align="left">
+			</td>
+			<td><font size="5" color ="black"><p>Name</p></td>
+			<td>:</td>
+			<td><font size="5" color ="Indigo">
+				<p align ="left">Farah Farhanim Ahmad Riza</p></td>
+		</tr>
+		<tr>
+			<td><font size="5" color ="black"><p>Address</p></td>
+			<td>:</td>
+			<td><font size="5" color ="Indigo">
+				<p align ="left"> Pt 17831, Jalan Tempurung, Bukit Mentok, 24000 Kemaman, Terengganu.</p></td>
+		</tr>
+		<tr>
+			<td><font size="5" color ="black"><p>Phone Number</p></td>
+			<td>:</td>
+			<td><font size="5" color ="Indigo">
+				<p align ="left"> 018-2522531</p></td>
+		</tr>
+		<tr>
+			<td><font size="5" color ="black"><p>Height</p></td>
+			<td>:</td>
+			<td><font size="5" color ="Indigo">
+				<p align ="left"> 154 cm</p></td>
+		</tr>
+		<tr>
+			<td><font size="5" color ="black"><p>Weight</p></td>
+			<td>:</td>
+			<td><font size="5" color ="Indigo" >
+				<p align ="left"> 46 kg</p></td>
+		</tr>
+	</tr>
+	</table>
+
+	<table border="0" cellpadding="50" cellspacing="30" width="100%">
+	<tr>
+  	<td><audio hidden controls autoplay><source src="audio.mp3" type="audio/mpeg"></audio></td>
+  	<td><a href="https://subway.com.my/"><img src="subway.jpg" height="130" width="130" align="center">     <a href="https://woodpeckers.asia/llaollao/"><img src="llaollao.jpg" height="130" width="130" align="center"></a></td>
+  	<td>
+
+  	<canvas id="canvas" width="130" height="130">
+	</canvas>
+
+  	<script>
+	const canvas = document.getElementById("canvas");
+	const ctx = canvas.getContext("2d");
+	let radius = canvas.height / 2;
+	ctx.translate(radius, radius);
+	radius = radius * 0.90
+	setInterval(drawClock, 1000);
+
+	function drawClock() {
+	  drawFace(ctx, radius);
+	  drawNumbers(ctx, radius);
+	  drawTime(ctx, radius);
+	}
+
+	function drawFace(ctx, radius) {
+	  const grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+ 	  grad.addColorStop(0, '#333');
+	  grad.addColorStop(0.5, 'white');
+	  grad.addColorStop(1, '#333');
+	  ctx.beginPath();
+	  ctx.arc(0, 0, radius, 0, 2*Math.PI);
+	  ctx.fillStyle = 'white';
+ 	  ctx.fill();
+	  ctx.strokeStyle = grad;
+	  ctx.lineWidth = radius*0.1;
+	  ctx.stroke();
+	  ctx.beginPath();
+	  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+	  ctx.fillStyle = '#333';
+	  ctx.fill();
+	}
+
+	function drawNumbers(ctx, radius) {
+	  ctx.font = radius*0.15 + "px arial";
+	  ctx.textBaseline="middle";
+	  ctx.textAlign="center";
+	  for(let num = 1; num < 13; num++){
+ 	   let ang = num * Math.PI / 6;
+	    ctx.rotate(ang);
+	    ctx.translate(0, -radius*0.85);
+	    ctx.rotate(-ang);
+	    ctx.fillText(num.toString(), 0, 0);
+	    ctx.rotate(ang);
+ 	   ctx.translate(0, radius*0.85);
+ 	   ctx.rotate(-ang);
+	  }
+	}
+
+	function drawTime(ctx, radius){
+	    const now = new Date();
+ 	   let hour = now.getHours();
+ 	   let minute = now.getMinutes();
+ 	   let second = now.getSeconds();
+	    //hour
+ 	   hour=hour%12;
+	    hour=(hour*Math.PI/6)+
+	    (minute*Math.PI/(6*60))+
+	    (second*Math.PI/(360*60));
+ 	   drawHand(ctx, hour, radius*0.5, radius*0.07);
+ 		//minute
+ 	   minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+ 	   drawHand(ctx, minute, radius*0.8, radius*0.07);
+ 	   // second
+ 	   second=(second*Math.PI/30);
+	    drawHand(ctx, second, radius*0.9, radius*0.02);
+	}
+
+	function drawHand(ctx, pos, length, width) {
+ 	   ctx.beginPath();
+	    ctx.lineWidth = width;
+	    ctx.lineCap = "round";
+	    ctx.moveTo(0,0);
+	    ctx.rotate(pos);
+	    ctx.lineTo(0, -length);
+	    ctx.stroke();
+ 	   ctx.rotate(-pos);
+	}
+	</script></td>
+	</tr>
+
+	</p>
+	</font>
+
+  <div class="footer">
+    <font size="2.5"><p> &copy;Hanim2023 version 1.2 </p>
+    </font> 
+  </div>
+ </div> 
+</body>
+
+</html> 
